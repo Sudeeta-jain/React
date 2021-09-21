@@ -1,46 +1,79 @@
-# Getting Started with Create React App
+## Created a React app
+Create a react app using npx create-react-app -template typescript command.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Created a components folder and inside it created 3 folders named login, home and register.
 
-## Available Scripts
+Created a tsx and css file for every folder of component.
 
-In the project directory, you can run:
+In the css file, styled the Button, textbox on login, register and homepage.
 
-### `yarn start`
+## Login.tsx
+Create a user variable using useState() 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+const [user, setUser]= useState({
+    email:"",
+    password:"",
+  })
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+In return created a button and textbox and on taking input in the text box implemented onChange functionality and handled the change by
 
-### `yarn test`
+const handleChange=(e: any) =>{
+    const {name, value} = e.target
+    setUser({
+        ...user,
+        [name]:value
+    })
+  }
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+And same way implemented onClick functionality of button and handle the click
 
-### `yarn build`
+onClick it will check if email and password matche to the one stored in the local storage. If email and password get matched then user get logged in to the home page else give invalid message and user get redirected to login page again
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+const handleLogin =(e: any) =>{
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    e.preventDefault();
+    var strpass= (localStorage.getItem('Email')?.replace(/"/g, ""));
+    var strpass1= (localStorage.getItem('Password')?.replace(/"/g, ""));
+    console.log(strpass)
+    if (strpass===(user.email) && strpass1===(user.password)){
+        alert("Login Successfully")
+        history.push("/home")
+      } else{
+        alert("Wrong Credentials")
+        history.push("/")
+      }
+    } 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Register.tsx
 
-### `yarn eject`
+Created a uservariable using useState() 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+ const [email1, setEmail]= useState("")
+   const [password1,setPassword]= useState("")
+    const [reEnterPassword, setReEnterPassword]= useState("")
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    
+  In return created some textbox and button
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+In return created some textbox and button and implemented onChange functionality of textbox and handled the onClick functionality of button as
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+const register = () => {
+       
+        if( email1 && password1&&(password1===reEnterPassword)){
+            localStorage.setItem("Email", JSON.stringify(email1))
+            localStorage.setItem("Password", JSON.stringify(password1))
+            localStorage.setItem("Re-enter", JSON.stringify(reEnterPassword))
+            alert("account created")
+            history.push("/")
+            }else {
+            alert("invlid input")
+        }
+        
+    }
+    
+On clicking th eregister if email and password is given then account will be created or else will show error message that invalid input.
 
-## Learn More
+## Home.tsx
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+On home page I have created a Logout button which when clicked take user back to login page and on hamepage there will dispaly a text Welcome to homepage.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
