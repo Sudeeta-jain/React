@@ -29,7 +29,7 @@ const Register = ()=> {
     }*/
    
     const register = () => {
-        //const { name, email, password, reEnterPassword } 
+        
         if( email1 && password1&&(password1===reEnterPassword)){
             //localStorage.setItem("Name", JSON.stringify(name1))
             localStorage.setItem("Email", JSON.stringify(email1))
