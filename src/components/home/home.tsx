@@ -8,7 +8,7 @@ const Home = ()=> {
     return (
         <div className="home">
             <h1>WELCOME TO HOMEPAGE</h1>
-            <button onClick = { () => history.push("/login")}>Logout</button>
+            <button onClick = { () => history.push("/")}>Logout</button>
         </div>
     )
 } 

@@ -8,28 +8,37 @@ const Register = ()=> {
 
     const history = useHistory()
 
-    const [user, setUser]= useState({
+    /*const [user, setUser]= useState({
         name:"",
         email:"",
         password:"",
         reEnterPassword:""
-    })
+    })*/
 
-    const handleChange=(e: any) =>{
+    //const [name1, setName]= useState("")
+    const [email1, setEmail]= useState("")
+    const [password1,setPassword]= useState("")
+    //const [reEnterPassword, setReEnterPassword]= useState("")
+
+    /*const handleChange=(e: any) =>{
         const {name, value} = e.target
         setUser({
             ...user,
             [name]:value
         })
-    }
+    }*/
 
-    
+    var steel= localStorage.getItem('MyUser')
+    console.log('My',steel)
    
     const register = () => {
-        const { name, email, password, reEnterPassword } = user
-        if( name && email && password && (password === reEnterPassword)){
-            localStorage.setItem("MyUser", JSON.stringify(user))
-            
+        //const { name, email, password, reEnterPassword } 
+        if( email1 && password1){
+            //localStorage.setItem("Name", JSON.stringify(name1))
+            localStorage.setItem("Email", JSON.stringify(email1))
+            localStorage.setItem("Password", JSON.stringify(password1))
+            //localStorage.setItem("Re-enter", JSON.stringify(reEnterPassword))
+            alert("account created")
             history.push("/login")
             }else {
             alert("invlid input")
@@ -40,16 +49,16 @@ const Register = ()=> {
     
     return (
         <div className="register">
-          {console.log("User",user)}
+          
           <h1>Register</h1>
-          <input type="text" name="name" value={user.name} placeholder="Enter your Name" onChange= {handleChange}></input>
-          <input type="text" name="email" value={user.email} placeholder="Enter your Email" onChange= {handleChange}></input>
-          <input type="password" name="password" value={user.password} placeholder="Enter your Password" onChange= {handleChange}></input>
-          <input type="password" name="reEnterPassword" value={user.reEnterPassword} placeholder="Re-Enter your Password" onChange= {handleChange}></input>
+          
+          <input type="email" name="email" value={email1} placeholder="Enter your Email" onChange= {(event) => setEmail(event.target.value)}></input>
+          <input type="password" name="password" value={password1} placeholder="Enter your Password" onChange= {(event) => setPassword(event.target.value)}></input>
+         
           <div> </div>
           <button type="submit" onClick = { register}>Register</button>
           <div>or</div>
-          <button onClick = {() => history.push("/login")}>Login</button>
+          <button onClick = {() => history.push("/")}>Login</button>
           
         </div>
     )

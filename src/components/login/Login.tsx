@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import "./Login.css"
 import { useHistory } from 'react-router-dom';
 
+
 const Login = ()=> {
 
   const history = useHistory()
@@ -19,21 +20,24 @@ const Login = ()=> {
     })
   }
 
-  var strpass= JSON.parse(localStorage.getItem("MYUser")|| '{}');
   
-  const handleLogin =() =>{
-    if (strpass.hasOwnProperty(user.email) && strpass.hasOwnProperty(user.password)){
+  const handleLogin =(e: any) =>{
+    e.preventDefault();
+    var strpass= (localStorage.getItem('Email')?.replace(/"/g, ""));
+    var strpass1= (localStorage.getItem('Password')?.replace(/"/g, ""));
+    console.log(strpass)
+    if (strpass===(user.email) && strpass1===(user.password)){
         alert("Login Successfully")
-        history.push("/")
+        history.push("/home")
       } else{
         alert("Wrong Credentials")
-        history.push("/login")
+        history.push("/")
       }
     } 
     return (
         <div className="login">
           {console.log("User",user)}
-          {console.log("test",JSON.parse(localStorage.getItem("MyUser")|| '{}'))}
+          {/*console.log("test",strpass)*/}
           <h1>Login</h1>
           <input type="text" name="email" value={user.email} placeholder="Enter your Email" onChange={handleChange}></input>
           <input type="password" name="password" value={user.password} placeholder="Enter your Password" onChange={handleChange}></input>
